@@ -8,29 +8,29 @@ import tinkerer.paths
 # **************************************************************
 
 # Change this to the name of your blog
-project = 'My blog'
+project = 'mani-mani\'s notes'
 
 # Change this to the tagline of your blog
-tagline = 'Add intelligent tagline here'
+tagline = 'Android, iOS, Python'
 
 # Change this to the description of your blog
-description = 'This is an awesome blog'
+description = u'まにまに@赴くままに'
 
 # Change this to your name
-author = 'Winston Smith'
+author = u'manimani'
 
 # Change this to your copyright string
-copyright = '1984, ' + author
+copyright = '2014, ' + author
 
 # Change this to your blog root URL (required for RSS feed)
-website = 'http://127.0.0.1/blog/html/'
+website = 'http://mani-mani.github.io/blog/html/'
 
 # **************************************************************
 # More tweaks you can do
 # **************************************************************
 
 # Add your Disqus shortname to enable comments powered by Disqus
-disqus_shortname = None
+disqus_shortname = 'manimanisnote' 
 
 # Change your favicon (new favicon goes in _static directory)
 html_favicon = 'tinkerer.ico'
