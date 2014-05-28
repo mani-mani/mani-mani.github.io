@@ -17,47 +17,65 @@
         <meta name="viewport" content="width=device-width">
         <title>sevabot-slide &mdash; mani-mani&#39;s notes</title>
 
-            <link rel="stylesheet" href="../_static/lib/ugoslide.css">
-            <link rel="stylesheet" href="../_static/md/syntax.white.css">
-            <script src="../_static/md/jquery-2.1.0.min.js"></script>
-            <script src="../_static/lib/ugoslide.min.js"></script>
-            <script src="../_static/md/highlight.pack.js"></script>
-            <script src="../_static/md/marked.js"></script>
-            <script src="../_static/md/md2slide.js"></script>
+            <link rel="stylesheet" href="../_static/ugoslide.css">
+            <link rel="stylesheet" href="../_static/syntax.white.css">
+            <script src="../_static/jquery-2.1.0.min.js"></script>
+            <script src="../_static/ugoslide.min.js"></script>
+            <script src="../_static/highlight.pack.js"></script>
+            <script src="../_static/marked.js"></script>
+            <script src="../_static/md2slide.js"></script>
     </head>
     <body class="default" role="document">
         <div class="ugoslide">
             <script type="text/markdown">
-# Skype bot はじめました 
+# ugoslide markdown
 
-* ビルドが終わったら通知したい
-
-![](http://sevabot-skype-bot.readthedocs.org/en/latest/_images/sevabot-256.png)
-[Sevabot](http://sevabot-skype-bot.readthedocs.org/en/latest/)
-
---------------------------------------
-# メッセージ送信
-
-```sh
-chat=$1
-msg=$2
-secret='password'
-msgaddress="http://localhost:5005/msg/"
-
-base=$chat$msg$secret
-md5=`/bin/echo -n $base | md5`
-
-for m in $md5; do
-    break
-done
-curl $msgaddress --proxy-ntlm --proxy xx.xx.xx.xx:8080 --data-urlencode chat="$chat" 
-    --data-urlencode msg="$msg" --data-urlencode md5="$m"
+```js
+// code
+$(function(){
+  var slide = new UgoSlide();
+  
+  setInterval(function(){
+    if (Math.random() > 0.01) return;
+    slide.showCurrent();
+  }, 100);
+});
 ```
 
----------------------------------------
-# まとめ
+---
+# blockquote contents
 
-* プログラマはコミットするだけ
+> Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. Although mathematics will help you arrive at elegant and efficient methods, the use of a computer and programming skills will be required to solve most problems.
+
+---
+# list
+
+* _em_ element  
+* __strong__ element  
+
+---
+# list
+
+## ordered
+
+1. one
+2. two
+3. three
+
+---
+# image
+
+![](http://placeimg.com/640/480/nature)
+
+image by [placeIMG](http://placeimg.com/)
+
+---
+# table
+
+|name|description|
+|----|-----------|
+|`highlight.js`|Syntax highlighting for the Web|
+|`marked.js`|A full-featured markdown parser and compiler, written in JavaScript. Built for speed.|
 
             </script>
         </div> 
