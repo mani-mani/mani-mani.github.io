@@ -1,1 +1,1 @@
-Search.setIndex({envversion:42,terms:{page:1,thi:1,first:1},objtypes:{},objnames:{},filenames:["master","2014/05/29/hello_world"],titles:["Sitemap","Hello World!"],objects:{},titleterms:{world:1,hello:1,sitemap:0}})
+Search.setIndex({envversion:42,terms:{slide:1,first:2,sevabot:1,thi:2,page:2},objtypes:{},objnames:{},filenames:["pages/sevabot_slide","master","2014/05/29/hello_world"],titles:["sevabot-slide","Sitemap","Hello World!"],objects:{},titleterms:{world:2,slide:0,hello:2,sitemap:1,sevabot:0}})
