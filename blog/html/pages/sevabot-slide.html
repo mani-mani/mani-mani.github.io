@@ -1,6 +1,4 @@
-<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:og="http://ogp.me/ns#"
-    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+/bin/bash: ((: https://www.dropbox.com/s/3na94mfoafroy51/sevabot.png: syntax error in expression (error token is "://www.dropbox.com/s/3na94mfoafroy51/sevabot.png")
 <!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:og="http://ogp.me/ns#"
     xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -28,54 +26,45 @@
     <body class="default" role="document">
         <div class="ugoslide">
             <script type="text/markdown">
-# ugoslide markdown
+# Skype bot はじめました
 
-```js
-// code
-$(function(){
-  var slide = new UgoSlide();
-  
-  setInterval(function(){
-    if (Math.random() > 0.01) return;
-    slide.showCurrent();
-  }, 100);
-});
+![](http://sevabot-skype-bot.readthedocs.org/en/latest/_images/sevabot-256.png)
+[Sevabot](http://sevabot-skype-bot.readthedocs.org/en/latest/)
+
+--------------------------------------
+# フロー
+
+![](https://www.dropbox.com/s/3na94mfoafroy51/sevabot.png)
+
+--------------------------------------
+# Skype Timeline
+
+![](https://www.dropbox.com/s/5n8q2akysiqg389/skype_ss.png)
+
+--------------------------------------
+# メッセージ送信
+
+```sh
+chat=$1
+msg=$2
+secret='password'
+msgaddress="http://localhost:5005/msg/"
+
+base=$chat$msg$secret
+md5=`/bin/echo -n $base | md5`
+
+for m in $md5; do
+    break
+done
+curl $msgaddress --proxy-ntlm --proxy xx.xx.xx.xx:8080 --data-urlencode chat="$chat" 
+    --data-urlencode msg="$msg" --data-urlencode md5="$m"
 ```
 
----
-# blockquote contents
+---------------------------------------
+# まとめ
 
-> Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. Although mathematics will help you arrive at elegant and efficient methods, the use of a computer and programming skills will be required to solve most problems.
-
----
-# list
-
-* _em_ element  
-* __strong__ element  
-
----
-# list
-
-## ordered
-
-1. one
-2. two
-3. three
-
----
-# image
-
-![](http://placeimg.com/640/480/nature)
-
-image by [placeIMG](http://placeimg.com/)
-
----
-# table
-
-|name|description|
-|----|-----------|
-|`highlight.js`|Syntax highlighting for the Web|
-|`marked.js`|A full-featured markdown parser and compiler, written in JavaScript. Built for speed.|
+* チケットと合わせて、修正を確認できる
+* プログラマはコミットするだけ
 
             </script>
         </div> 
