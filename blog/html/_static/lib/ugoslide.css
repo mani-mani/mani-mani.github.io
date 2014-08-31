@@ -41,11 +41,11 @@
  * default design
  */
 .default {
-  background: #502c3e/*#ecf0f1*/; }
+  background: #e6dde4/*#ecf0f1*/; }
   .default .ugoslide {
     text-align: center;
     color: #2c3e50;
-    margin: 0.2em;
+    margin: 1em;
     background: #fff;
     border-radius: 1em; }
   .default .ugoslide-words {
