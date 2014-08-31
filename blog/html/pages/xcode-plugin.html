@@ -5,7 +5,7 @@
             <link rel="stylesheet" href="../_static/lib/ugoslide.css">
             <link rel="stylesheet" href="../_static/md/syntax.white.css">
             <script src="../_static/md/jquery-2.1.0.min.js"></script>
-            <script src="../_static/lib/ugoslide.min.js"></script>
+            <script src="../_static/lib/ugoslide.js"></script>
             <script src="../_static/md/highlight.pack.js"></script>
             <script src="../_static/md/marked.js"></script>
             <script src="../_static//md/md2slide.js"></script>
@@ -16,36 +16,85 @@
 # Xcode Plugins
 
 使ってよかった **Xcode Plugins** 5選
-![](https://devimages.apple.com.edgekey.net/assets/elements/icons/80x80/xcode_2x.png)
 
 --------------------------------------
-# Alcatraz
+# Xcode
+
+![](https://devimages.apple.com.edgekey.net/assets/elements/icons/80x80/xcode_2x.png)
+
+OSX、iOSソフトを開発するためのIDE
+開発言語 C/C++/Objective-C/Swift
+*みんな大好き*
+
+-------------------------------------
+# Plug-ins
+
+- **Alcatraz**
+  -- Xcodeプラグインを管理するプラグイン
+- **BBUncrustifyPlugin-Xcode**
+  -- Xcodeで使うformatter
+- **VVDocumenter**
+  -- appledoc形式のコメント
+- **XVim**
+  -- XcodeでVimのキーバインド
+- **xcfui**
+  -- 使用していないimportを削除できる
+
+--------------------------------------
+# [Alcatraz](http://alcatraz.io/)
 
 ![](http://alcatraz.io/images/logo.svg)
 
+
+```
+# インストール
+$ curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
+```
+
+
+```
+# インストール先
+${HOME}/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/
+```
+-------------------------------------- 
+
+![](https://dl.dropbox.com/s/dibrnwr0qhqjq2p/Screenshot_2014-08-28_01_34_35.png)
+
 --------------------------------------
-# BBUncrustifyPlugin-Xcode
+# [BBUncrustifyPlugin-Xcode](https://github.com/benoitsan/BBUncrustifyPlugin-Xcode)
 
 ![](https://dl.dropbox.com/s/o2emu18o8h85bwz/formatter.gif)
 
 
 --------------------------------------
-# VVDocumenter
+# [VVDocumenter](https://github.com/onevcat/VVDocumenter-Xcode)
 
 ![](https://dl.dropbox.com/s/1zn40szseyu65pg/vvdocument.gif)
 
 「///」と入力するとappledocのフォーマットでコメントを生成してくれる
 
 ---------------------------------------
-# XVim
+# [XVim](https://github.com/JugglerShu/XVim)
 
-https://github.com/JugglerShu/XVim
-
+![](https://dl.dropbox.com/s/6eq7wd1x0md3n4k/Screenshot_2014-08-31_01_46_39.png)
 
 --------------------------------------
-# xcfui
+# [xcfui](https://github.com/jcavar/xcfui)
 
-https://github.com/jcavar/xcfui
+- 「Find unused imports」にチェックを入れてビルドする
+- チェック用のスクリプトがプロジェクトに追加される
+- 使用していないimportがある場合, ビルド時にWarningを出してくれる
+
+```
+# 事前にインストールする必要がある
+$ sudo gem install fui xcodeproj
+```
+
+---------------------------------------
+# まとめ
+
+- なかなか便利なのん
+- Xcodeのバージョンアップで使えなくなることもあるので注意なのん
 
             </script>
         </div> 

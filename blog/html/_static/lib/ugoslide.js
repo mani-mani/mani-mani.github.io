@@ -52,7 +52,7 @@
       var getBehind, textScale,
         _this = this;
       if (this.$root.find('.ugoslide-navigator').length === 0) {
-        this.$root.append("<div class=\"ugoslide-navigator\">\n  <a href=\"#\" class=\"ugoslide-prev\">&lt;&lt;</a>\n  <span class=\"ugoslide-current\"></span>\n  <a href=\"#\" class=\"ugoslide-next\">&gt;&gt;</a>\n</div>");
+        this.$root.append("<div class=\"ugoslide-navigator\">\n  <a href=\"#\" class=\"ugoslide-prev\"></a>\n  <span class=\"ugoslide-current\"></span>\n  <a href=\"#\" class=\"ugoslide-next\"></a>\n</div>");
       }
       if (this.$root.find('.ugoslide-words').length === 0) {
         this.$root.append('<div class="ugoslide-words"></div>');
