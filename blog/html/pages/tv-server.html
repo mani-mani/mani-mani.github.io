@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+     <head>
+        <meta charset="utf-8">
+            <link rel="stylesheet" href="../_static/lib/ugoslide.css">
+            <link rel="stylesheet" href="../_static/md/syntax.white.css">
+            <script src="../_static/md/jquery-2.1.0.min.js"></script>
+            <script src="../_static/lib/ugoslide.js"></script>
+            <script src="../_static/md/highlight.pack.js"></script>
+            <script src="../_static/md/marked.js"></script>
+            <script src="../_static//md/md2slide.js"></script>
+    </head>
+    <body class="default">
+        <div class="ugoslide">
+            <script type="text/markdown">
+# 録画サーバの話
+
+--------------------------------------
+
+# おことわり
+
+これから発表する内容には一部グレーな部分があります
+大人な対応でお願いします m(_ _)m
+
+--------------------------------------
+# 背景
+
+![](https://dl.dropbox.com/s/noe599mudqtli5r/yoshioka_msg.png)
+
+※一部脚色さております
+
+-------------------------------------
+# 通常の録画チューナー
+
+- **地上デジタル放送開始**
+    -- 2003年からデジタル放送開始、2011年アナログ放送停波
+- **ダビング10**
+    -- 10回までDVD/BDに書き出しができる
+- **CPRM対応**
+    -- コピー・ワンス（1世代だけ録画可能）の番組を録画する時に使われるコピー制御方式
+    -- CPRM対応のDVD/BD プレイヤー等が必要
+    -- 専用の再生ソフトが必要
+    -- 地デジはじまって１年くらいはデコーダがあった・・
+- **B-CAS**
+    -- デジタル放送の著作権保護のための複合するためのカード
+    -- 他国に持ち出してはいけない
+
+--------------------------------------
+
+# **注意**   nasne も同じです
+
+-------------------------------------- 
+
+# こんなんじゃ*アニメライフ*を満喫できないよね
+ 
+--------------------------------------
+# PT3 
+
+![](http://ecx.images-amazon.com/images/I/41YWpgDYFQL.jpg)
+
+--------------------------------------
+# 録画サーバPC
+
+- CPU + MB
+    -- AD2700-ITX (Atom D2700)
+- Memory
+    -- 2 GB x 2
+- PC ケース
+    -- KT-CUBE-ITX01 (電源付)
+- HDD 
+    -- 3 TB x 1
+- OS
+    -- Ubuntu 12.04
+- 録画チューナ
+    -- PT2 (PT3 のひとつ前の世代)
+- ICカードリーダ
+    -- SCR3310-NTTCom
+    -- B-CAS読み込み用
+
+---------------------------------------
+
+# ICカードリーダ
+
+![](http://www.oshiete-kun.net/archives/image07/1102/pt2_01_06-thum.jpg)
+
+---------------------------------------
+# 録画サーバ
+
+![](https://dl.dropbox.com/s/vror0utkrh73wil/tvrec-pc.png)
+
+--------------------------------------
+# ドライバ 
+
+```
+# ドライバのダウンロード
+$ wget http://hg.honeyplanet.jp/pt1/archive/tip.tar.bz2
+$ bzip2 -dc tip.tar.bz2 | tar xvf -
+# ビルドに必要なパッケージ
+$ sudo apt-get -y install build-essential 
+$ cd pt1-c8688d7d6382
+# ビルドしてインストール
+$ sudo make && make install
+# デバイス認識チェック(再起動してから)
+$ dmesg | less | grep 'pt1'
+# 復号ツールarib25をダウンロードしてビルド
+$ wget http://hg.honeyplanet.jp/pt1/archive/c44e16dbb0e2.tar.bz2
+$ bzip2 -dc c44e16dbb0e2.tar.bz2 | tar xvf - && cd pt1-c44e16dbb0e2/arib25
+$ sudo make && make install
+# 録画コマンドビルド
+$ cd pt1-c8688d7d6382i/recpt1
+$ ./autogen.sh
+$ sudo ./configure --enable-b25 && make && make install
+# 録画テスト
+$ recpt1 --b25 --strip 27 30 test.ts
+```
+
+---------------------------------------
+# EPGrec 録画予約
+
+```sh
+# epgdump 番組取得ツール
+$ wget -O epgdumpr2-utf8.tar.gz "http://www.mda.or.jp/epgrec/index.php?plugin=attach&refer=%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E5%89%8D%E3%81%AE%E6%BA%96%E5%82%99&openfile=epgdumpr2-utf8.tar.gz"
+$ tar xvzf epgdumpr2-utf8.tar.gz && cd epgdump2
+$ sudo make && cp epgdump /usr/local/bin
+# epgrec 番組予約ツール
+$ wget -O epgrec.tar.gz "http://sourceforge.jp/projects/epgrec/downloads/53387/epgrec_20111001.tar.gz/"
+$ sudo tar xvzpf epgrec.tar.gz -C /var/www/ && cd /var/www/epgrec/
+
+# あとmysqlの設定とか
+# Sambaの設定とか
+```
+
+---------------------------------------
+# config.php
+
+```php
+  6 // 首都圏用地上デジタルチャンネルマップ
+  7 // 識別子 => チャンネル番号
+  8 $GR_CHANNEL_MAP = array(
+  9     "GR27" => "27",     // NHK
+ 10     "GR26" => "26",     // 教育
+ 11     "GR25" => "25",     // 日テレ
+ 12     "GR22" => "22",     // 東京
+ 13     "GR21" => "21",     // フジ
+ 14     "GR24" => "24",     // テレ朝
+ 15     "GR23" => "23",     // テレ東
+ 16 //  "GR20" => "20",     // MX TV
+ 17 //  "GR18" => "18",     // テレ神
+ 18     "GR30" => "30",     // 千葉
+ 19 //  "GR32" => "32",     // テレ玉
+ 20     "GR28" => "28",     // 大学
+ 21 );
+ 22
+```
+----------------------------------------
+# tsファイル
+
+- 録画されたファイルはtsファイルとして書き出されます
+- MPEG2TSはデジタル放送などで動画・音声データを固定長のパケットに分割して
+送受信するためのデータ形式で、テレビチューナーなどで受信した放送データを
+そのままファイルに記録したものがTSファイルとなる。
+    -- http://e-words.jp/w/TSE38395E382A1E382A4E383AB.html
+- tsファイルになればダビング10、CPRMも関係なし
+- tsファイルをmp4等に変換するときはwindows上でTMPEGEncソフトを使ってエンコード
+
+----------------------------------------
+# ffmpeg
+
+- エンコードは自動化したい
+- インストール
+
+```sh
+$ brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype 
+--with-frei0r --with-libass --with-libbluray --with-libcaca 
+--with-libquvi --with-libvidstab --with-libvo-aacenc --with-libvorbis 
+--with-libvpx --with-opencore-amr --with-openjpeg --with-openssl 
+--with-opus --with-rtmpdump --with-schroedinger --with-speex 
+--with-theora --with-tools --with-x265
+```
+
+----------------------------------------
+# python
+
+- H264にエンコードする
+
+```python
+#!/usr/bin/env python
+# coding:utf-8
+from subprocess import Popen, PIPE, call
+# ffmpegへのパス
+FFMPEG_PATH = "/usr/local/bin/ffmpeg"
+if __name__ == '__main__':
+    import sys, os
+    if len(sys.argv) > 1:
+        name = sys.argv[1]
+        base_name = os.path.basename(name)
+        base_name = ''.join(base_name.split('.')[:-1])
+        out, err = ts2mp4(name, base_name)
+        print out
+        print err
+    else:
+        print 'Not found arg'
+```
+
+----------------------------------------
+# python
+
+```python
+def ts2mp4(input_file, output_file):
+    '''tsからmp4に変換
+    '''
+    # 書き出しファイルパス
+    output_filepath = './' + output_file + '.mp4'
+    # ffmpegコマンド
+    x264_command = (FFMPEG_PATH,
+                    '-y', '-i', input_file, '-f', 'mp4',
+                    '-vcodec', 'libx264', '-fpre', 'libx264-hq-ts.ffpreset',
+                    '-r', '30000/1001', '-aspect', '16:9', '-s', '1280x720', 
+                    '-bufsize', '20000k', '-maxrate', '25000k',
+                    '-acodec', 'libfaac', '-ac', '2', '-ar', '48000', '-ab', '128k',
+                    output_filepath)
+    p = Popen(x264_command, stdout=PIPE, stderr=PIPE)
+    return p.stdout.read(), p.stderr.read()
+```
+-----------------------------------------
+# ffpreset
+
+```
+level=41
+crf=25
+coder=1
+flags=+loop
+cmp=+chroma
+partitions=+parti8x8+parti4x4+partp8x8+partb8x8
+me_method=umh
+subq=7
+me_range=16
+g=250
+keyint_min=25
+sc_threshold=40
+i_qfactor=0.71
+b_strategy=1
+qmin=10
+rc_eq='blurCplx^(1-qComp)'
+bf=16
+bidir_refine=1
+refs=6
+```
+
+-----------------------------------------
+# まとめ
+
+- PT2使った録画サーバ
+    -- 2年程稼動しているが問題ない感じ
+- 手動で行っている部分を自動化したい 
+    -- ffmpeg x264エンコード
+    -- comskip CMカットツール
+    -- これから試したい・・ｺﾞﾒﾝﾅｻｲ
+
+ 
+            </script>
+        </div> 
+    </body>
+</html>
